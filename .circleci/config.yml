@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: gcr.io/php-mvm-a/php-nginx
+    steps:
+      - checkout
+
+  test:
+    docker:
+      - image: gcr.io/php-mvm-a/php-nginx
+    steps:
+      - checkout
+      - run:
+          name: Version
+          command: php -v
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+
