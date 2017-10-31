@@ -2,15 +2,18 @@ version: 2
 jobs:
   build:
     docker:
-      - image: gcr.io/php-mvm-a/php-nginx
+      - image: circleci/php:7.1-browsers
     steps:
       - checkout
 
   test:
     docker:
-      - image: gcr.io/php-mvm-a/php-nginx
+      - image: circleci/php:7.1-browsers
     steps:
       - checkout
+      - run:
+          name: PWD
+          command: pwd
       - run:
           name: Version
           command: php -v
